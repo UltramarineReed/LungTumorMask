@@ -209,7 +209,10 @@ def remove_pad(mask, original):
     return mask[a_min:a_max, b_min:b_max, c_min: c_max]
 
 def voxel_space(image, target):
-    image = Resize((target[0][1]-target[0][0], target[1][1]-target[1][0], target[2][1]-target[2][0]), mode='trilinear')(np.expand_dims(image, 0))[0]
+    size = (int(target[0][1]-target[0][0]),
+        int(target[1][1]-target[1][0]),
+        int(target[2][1]-target[2][0]))
+    image = Resize(size, mode='trilinear')(np.expand_dims(image, 0))[0]
 
     return image
 
